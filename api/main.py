@@ -1,13 +1,17 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 
-from agents.planner import create_plan
+from orchestrator.router import AgentRouter
+
 
 app = FastAPI(
     title="Agentic OS",
     description="Enterprise Multi-Agent AI Operating System",
     version="1.0.0"
 )
+
+# Create router object
+router = AgentRouter()
 
 
 class GoalRequest(BaseModel):
@@ -29,12 +33,9 @@ def health():
     }
 
 
-@app.post("/plan")
-def planner(request: GoalRequest):
+@app.post("/execute")
+def execute(request: GoalRequest):
 
-    plan = create_plan(request.goal)
+    result = router.execute(request.goal)
 
-    return {
-        "goal": request.goal,
-        "plan": plan
-    }
+    return result

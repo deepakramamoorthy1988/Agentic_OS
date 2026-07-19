@@ -1,9 +1,11 @@
 from ollama import chat
 
 
-def create_plan(goal: str):
+class PlannerAgent:
 
-    prompt = f"""
+    def plan(self, goal: str):
+
+        prompt = f"""
 You are a Senior Solution Architect.
 
 Create an execution plan.
@@ -22,14 +24,14 @@ Goal:
 {goal}
 """
 
-    response = chat(
-        model="llama3.2",
-        messages=[
-            {
-                "role": "user",
-                "content": prompt
-            }
-        ]
-    )
+        response = chat(
+            model="llama3.2",
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ]
+        )
 
-    return response.message.content
+        return response.message.content
