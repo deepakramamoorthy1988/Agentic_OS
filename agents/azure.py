@@ -3,26 +3,27 @@ from ollama import chat
 
 class AzureAgent:
 
-    def execute(self, goal: str):
+    def execute(self, goal, context=""):
 
         prompt = f"""
 You are a Microsoft Azure Solution Architect.
 
-For the following goal:
+You have received an execution plan from the Planner Agent.
+
+Planner Output:
+
+{context}
+
+User Goal:
 
 {goal}
 
-Return:
+Your task:
 
-1. Azure Services
-2. Resource Architecture
-3. Deployment Order
-
-Keep the answer short.
-
-No code.
-
-Plain text.
+- Design the Azure architecture.
+- Recommend Azure services.
+- Explain deployment order.
+- Keep the response concise.
 """
 
         response = chat(

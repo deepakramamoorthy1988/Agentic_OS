@@ -3,28 +3,28 @@ from ollama import chat
 
 class ReviewerAgent:
 
-    def execute(self, goal: str):
+    def execute(self, goal, context=""):
 
         prompt = f"""
-You are a Senior Cloud Security and Code Review Engineer.
+You are a Senior Cloud Solution Reviewer.
 
-Goal:
+You have received the application design from the Developer Agent.
+
+Developer Design:
+
+{context}
+
+User Goal:
+
 {goal}
 
-Review the proposed solution.
+Your task:
 
-Return:
-
-1. Security Checks
-2. Best Practices
-3. Risks
-4. Improvements
-
-Keep it concise.
-
-No code.
-
-Plain text.
+- Review the overall solution.
+- Identify security risks.
+- Suggest best practices.
+- Recommend improvements.
+- Keep the response concise.
 """
 
         response = chat(

@@ -3,25 +3,28 @@ from ollama import chat
 
 class DevOpsAgent:
 
-    def execute(self, goal: str):
+    def execute(self, goal, context=""):
 
         prompt = f"""
 You are a Senior Azure DevOps Engineer.
 
-Goal:
+You have received the Azure architecture from the Azure Agent.
+
+Azure Architecture:
+
+{context}
+
+User Goal:
+
 {goal}
 
-Provide:
+Your task:
 
-1. CI/CD Pipeline
-2. Tools Required
-3. Deployment Steps
-
-Keep it short.
-
-No code.
-
-Plain text.
+- Design the CI/CD pipeline.
+- Explain deployment strategy.
+- Recommend Azure DevOps services.
+- Mention Terraform, Git, and deployment flow.
+- Keep the response concise.
 """
 
         response = chat(

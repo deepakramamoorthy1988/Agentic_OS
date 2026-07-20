@@ -3,25 +3,28 @@ from ollama import chat
 
 class DeveloperAgent:
 
-    def execute(self, goal: str):
+    def execute(self, goal, context=""):
 
         prompt = f"""
-You are a Senior Python Software Engineer.
+You are a Senior Python and Cloud Application Developer.
 
-Goal:
+You have received the DevOps implementation strategy.
+
+DevOps Strategy:
+
+{context}
+
+User Goal:
+
 {goal}
 
-Provide:
+Your task:
 
-1. Project Structure
-2. Required Files
-3. Technology Stack
-
-Keep it concise.
-
-No code.
-
-Plain text.
+- Design the project structure.
+- Recommend technologies.
+- Suggest application architecture.
+- Recommend folder structure.
+- Keep the response concise.
 """
 
         response = chat(
